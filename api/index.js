@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const {dotenv,PORT} = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const multer = require("multer");
@@ -30,7 +30,7 @@ app.use(morgan("common"));
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/images");
-  },
+  }, 
   filename: (req, file, cb) => {
     cb(null, req.body.name);
   },
@@ -49,6 +49,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 
-app.listen(8800, () => {
+app.listen(8800, () => { 
   console.log("Backend server is running!");
 });
